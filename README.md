@@ -1,4 +1,4 @@
-# TCP Client-Server Program 
+# TCP Client-Server Program For a Student Database
 
 ####
 
@@ -22,31 +22,31 @@ The server processes the requests and sends several responses along the way to v
 
 Screenshots Here
 
-## Installation and Setup Instructions
+## Setup and Execution Instructions
 
 ####  
 
-Clone down this repository. You will need a network host. I am using 'zeus.cs.txstate.edu' and 'eros.cs.txstate.edu' in this example 
+Clone down this repository. This program can be run completely in the CLI using a network host. I am using `eros.cs.txstate.edu` in this example.
 
-Verify Flutter is Ready:
+Compile the client file: 
 
-`flutter doctor`  
+`$gcc -o c client_tcp_project1.c` 
 
-Open Simulator:  
+Compile the server file: 
 
-`open -a simulator`  
+`$gcc -o s server_tcp_project1.c`
 
-To Start Project:
+Run the server file first: 
 
-`flutter run`  
+`$./s 12000`
+
+Run the client file second: 
+
+`$./c eros.cs.txstate.edu 12000`
 
 ## Reflection
 
 ####
 
-This was a 2-week long personal project aimed to familiarize myself with building mobile apps. I was inspired to create this timer app because the functionality is something I wanted to use in my daily life. Project goals included becoming skilled at using the Flutter framework and learning a new programming language, Dart.
-
-One of the main obstacles I ran into was adding sound. The current audio plugin, audioplayers, had some bugs that weren't allowing me to play sound effects. Ultimately, I had to upgrade the plugin to audioplayers 5.2.1 to get the sound to work. I learned to inspect and configure the pubspec.yaml because of this hurdle.
-
-I chose to work with the open source framework, Flutter because it is growing in popularity and I wanted to challenge myself by developing my app in Dart, a language I hadn't used before. I gained experience in setting up an SDK, configuring plugins and designing pages for a mobile app.
+Reflection here of what I learned
 
