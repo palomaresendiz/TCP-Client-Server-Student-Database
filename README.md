@@ -18,9 +18,15 @@ The server processes the requests and sends several responses along the way to v
 
 ## Screenshots
 
-####
+#### 
+The client displays the menu and the user inputs the selection 1, to add a student to the database
+<img width="750" alt="add student" src="https://github.com/palomaresendiz/TCP-Client-Server-Student-Database/assets/127056165/1e09736d-9708-4835-9b97-86589a99eb07">
 
-Screenshots Here
+After adding more students to the database, the client sends a request to display them
+<img width="495" alt="display students" src="https://github.com/palomaresendiz/TCP-Client-Server-Student-Database/assets/127056165/2bc796e9-3ff1-4b52-8584-da6e48d1d89f">
+
+The server program processing the requests  
+<img width="238" alt="server side" src="https://github.com/palomaresendiz/TCP-Client-Server-Student-Database/assets/127056165/2d6d96f6-fe5d-4fbd-b9b4-7f07df0a97b3">
 
 ## Setup and Execution Instructions
 
@@ -48,10 +54,12 @@ Run the client file second:
 
 ####
 
-This started as a project for my Computer Networks class that I decided to build upon.
-The original project only required a smaller list of requests so I decided to add more. This project was my introduction to TCP and setting up communication between a client and a server program.
+This started as a project for my Computer Networks class that I decided to build upon. The original project only required a smaller list of requests so I decided to add more. This project was my introduction to TCP and setting up communication between a client and a server program.
 
-I learned (sockets, sending and receving messages)
+While developing this student database program, I learned the intricacies of socket programming and the establishment of communication between a client and server using TCP. Understanding the nuances of setting up sockets, configuring server addresses, and managing the flow of messages between the two entities was crucial. I practiced converting data between host and network byte orders, utilizing functions like htonl and ntohl to ensure proper data interpretation. I gained experience in debugging and refining the communication process because I encountered a lot of errors along the way. 
 
-My biggest challenge in this project was coordinating the messages between the client and the server. In the beginning, my server was sending messages out of order, or so I thought. It was because I didn't organize receiving the messages on the client or I was missing some receive message functions. I had to map out all the messages being sent and received on a piece of paper to visualize the communication and deeply understand how a client-server program works. 
+My biggest challenge in this project was coordinating the messages between the client and the server. In the beginning, my server was sending messages out of order, or so I thought. It was because I didn't organize receiving the messages on the client side or I was missing some receive message functions. I had to map out all the messages being sent and received on a piece of paper to visualize the communication and deeply understand how the transmission between a client and a server works. 
+
+Overall, this project enhanced my comprehension of TCP communication and the programming language C, laying a foundation for future endeavors in network programming.
+
 
