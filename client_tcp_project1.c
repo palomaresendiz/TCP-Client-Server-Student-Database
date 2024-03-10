@@ -1,8 +1,6 @@
 /****************Client program********************************/
 
 /* client_tcp.c is on zeus.cs.txstate.edu
-   open a window on zeus.
-   use a port number between 10,000-15,000.
    compile:
    $gcc -o c client_tcp_project1.c
    $./c eros.cs.txstate.edu 12000
@@ -96,19 +94,15 @@ int main(int argc, char **argv){
     recv(clientSocket, msg, sizeof(msg), 0);
     printf("%s\n", msg);
 
-    //while loop to get menu to re-display
     while (userInput != 6)
     {
-        // send command to server
+        // send command to server and receive message
         sendCommand(userInput);
 
-        // escape case
         userInput = printMenu();
-        // send new user input
         cuserInput = htonl(userInput);
         send(clientSocket, &cuserInput, sizeof(cuserInput), 0);
 
-        // receive a reply message from the server
         recv(clientSocket, msg, sizeof(msg), 0);
         printf("%s\n", msg);
     }
@@ -139,10 +133,9 @@ int printMenu()
 
 void sendCommand(int userInput)
 {
-    // send databse command attributes (if needed) from user to server
     if (userInput == 1)
     {
-        // user input ID
+        // user input student information
         printf("You chose add, enter ID: ");
         scanf("%d", &ID);
         cID = htonl(ID);
@@ -150,7 +143,6 @@ void sendCommand(int userInput)
         recv(clientSocket, msg, sizeof(msg), 0);
         printf("%s\n", msg);
 
-        // user input Fname
         printf("Enter Fname: ");
         scanf("%s", &Fname);
         uint32_t FnameSize = (strlen(Fname));
@@ -159,7 +151,6 @@ void sendCommand(int userInput)
         recv(clientSocket, msg, sizeof(msg), 0);
         printf("%s\n", msg);
 
-        // user input Lname
         printf("Enter Lname: ");
         scanf("%s", &Lname);
         uint32_t LnameSize = (strlen(Lname));
@@ -168,7 +159,6 @@ void sendCommand(int userInput)
         recv(clientSocket, msg, sizeof(msg), 0);
         printf("%s\n", msg);
 
-        // user input score
         printf("Enter score: ");
         scanf("%d", &score);
         cscore = htonl(score);
@@ -234,7 +224,7 @@ void sendCommand(int userInput)
     }
     else if (userInput == 4)
     {
-        // receive and display
+        // receive and display all student information
         struct Student receivedStudent;
         recv(clientSocket, &receivedStudent, sizeof(receivedStudent), 0);
         printf("Student Information:\n");

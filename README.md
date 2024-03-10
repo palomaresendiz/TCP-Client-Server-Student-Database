@@ -26,7 +26,7 @@ Screenshots Here
 
 ####  
 
-Clone down this repository. This program can be run completely in the CLI using a network host. I am using `eros.cs.txstate.edu` in this example.
+Clone down this repository. This program can be run in the CLI using two distinct networks. I am using `zeus.cs.txstate.edu` and `eros.cs.txstate.edu` in this example.
 
 Compile the client file: 
 
@@ -48,5 +48,10 @@ Run the client file second:
 
 ####
 
-Reflection here of what I learned
+This started as a project for my Computer Networks class that I decided to build upon.
+The original project only required a smaller list of requests so I decided to add more. This project was my introduction to TCP and setting up communication between a client and a server program.
+
+I learned (sockets, sending and receving messages)
+
+My biggest challenge in this project was coordinating the messages between the client and the server. In the beginning, my server was sending messages out of order, or so I thought. It was because I didn't organize receiving the messages on the client or I was missing some receive message functions. I had to map out all the messages being sent and received on a piece of paper to visualize the communication and deeply understand how a client-server program works. 
 

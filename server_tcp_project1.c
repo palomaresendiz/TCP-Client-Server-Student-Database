@@ -1,8 +1,6 @@
 /***************Server program**************************/
 
 /* server_tcp.c is on eros.cs.txstate.edu
-   open a window on eros.
-   use a port number between 10,000-15,000.
    compile and run the server program first:
    $gcc -o s server_tcp_project1.c
    $./s 12000
@@ -16,7 +14,6 @@
 #include <string.h>
 #include <fcntl.h>
 
-//student struct for database
 struct Student {
     int ID;
     char Fname[10];
@@ -101,18 +98,16 @@ int main(int argc, char **argv){
     strcpy(msg, "User selection received");
     send(newSocket, msg, sizeof(msg), 0);
 
-    // perform command
     while (userInput != 6)
     {
-        if (ntohl(userInput) == 1) // add student to database
+        if (ntohl(userInput) == 1)
         {
-            // receive ID from the client
+            // receive student information
             recv(newSocket, &ID, sizeof(ID), 0);
             printf("ID: %d\n",ntohl(ID));   
             strcpy(msg, "ID received");
             send(newSocket, msg, sizeof(msg), 0);
 
-            // receive Fname from the client
             recv(newSocket, &FnameSize, sizeof(FnameSize), 0);
             recv(newSocket, Fname, FnameSize, 0);
             Fname[FnameSize] = '\0';
@@ -120,7 +115,6 @@ int main(int argc, char **argv){
             strcpy(msg, "Fname received");
             send(newSocket, msg, sizeof(msg), 0);
 
-            // receive Lname from the client
             recv(newSocket, &LnameSize, sizeof(LnameSize), 0);
             recv(newSocket, Lname, LnameSize, 0);
             Lname[LnameSize] = '\0';
@@ -128,7 +122,6 @@ int main(int argc, char **argv){
             strcpy(msg, "Lname received");
             send(newSocket, msg, sizeof(msg), 0);
 
-            // receive score from the client
             recv(newSocket, &score, sizeof(score), 0);
             printf("score: %d\n",ntohl(score));   
             strcpy(msg, "score received");
@@ -147,7 +140,7 @@ int main(int argc, char **argv){
             strcpy(msg, "New student information has been added to the database");
             send(newSocket, msg, sizeof(msg), 0);
         }
-        else if (ntohl(userInput) == 2) // display student based on ID match
+        else if (ntohl(userInput) == 2)
         {
             // receive ID from the client
             recv(newSocket, &ID, sizeof(ID), 0);
@@ -182,7 +175,7 @@ int main(int argc, char **argv){
                 send(newSocket, &notFoundStudent, sizeof(notFoundStudent), 0);
             }
         }
-        else if (ntohl(userInput) == 3) // display all students who have a score above score sent from client
+        else if (ntohl(userInput) == 3) 
         {
             // receive score from the client
             recv(newSocket, &score, sizeof(score), 0);
@@ -218,7 +211,7 @@ int main(int argc, char **argv){
                 send(newSocket, &endFlag, sizeof(endFlag), 0);
             }
         }
-        else if (ntohl(userInput) == 4) // display all students in database
+        else if (ntohl(userInput) == 4)
         {
             // send information of all the students
             struct Student currentStudent;
@@ -232,11 +225,12 @@ int main(int argc, char **argv){
             endFlag.ID = -1;
             send(newSocket, &endFlag, sizeof(endFlag), 0);
         }
-        else if (ntohl(userInput) == 5) // delete student based on ID
+        else if (ntohl(userInput) == 5)
         {
             // receive ID from the client
             recv(newSocket, &ID, sizeof(ID), 0);
-            printf("ID: %d\n",ntohl(ID));   
+            printf("ID: %d\n",ntohl(ID)); 
+
             // send a reply message to the client
             strcpy(msg, "ID received");
             send(newSocket, msg, sizeof(msg), 0);
@@ -249,7 +243,6 @@ int main(int argc, char **argv){
                 exit(EXIT_FAILURE);
             }
 
-            // Iterate through the database and copy all students except the one to be deleted to the temporary file
             struct Student currentStudent;
             int targetID = ntohl(ID);
             int found = 0;
@@ -269,17 +262,14 @@ int main(int argc, char **argv){
             fclose(tempFile);
             fclose(databaseFile);
 
-            // Remove the original database file
             remove("student_database.txt");
 
-            // Rename the temporary file to the original database file
             if (rename("temp_database.txt", "student_database.txt") != 0)
             {
                 perror("Error renaming the temporary file");
                 exit(EXIT_FAILURE);
             }
 
-            // Open the updated database file for further use
             databaseFile = fopen("student_database.txt", "a+");
 
             if (databaseFile == NULL)
@@ -288,7 +278,7 @@ int main(int argc, char **argv){
                 exit(EXIT_FAILURE);
             }
 
-            // Send a reply message to the client
+            // send a reply message to the client
             if (found)
                 strcpy(msg, "Student information deleted from the database");
             else
@@ -297,16 +287,13 @@ int main(int argc, char **argv){
             send(newSocket, msg, sizeof(msg), 0);
         }
 
-        // receive menu option for next loop
         recv(newSocket, &userInput, sizeof(userInput), 0);
         printf("User selection: %d\n",ntohl(userInput)); 
 
-        // send a reply message to the client
         strcpy(msg, "User selection received");
         send(newSocket, msg, sizeof(msg), 0);
     }
-
-    //remove("student_database.txt");
+    
     fclose(databaseFile);
     close(newSocket);
     close(welcomeSocket);
