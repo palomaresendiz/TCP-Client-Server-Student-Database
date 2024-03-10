@@ -14,8 +14,7 @@ all students whose scores are above the sent score to the client
 5. delete(ID): this request deletes the student entry with that ID from the database
 6. exit: this request terminates the program
 
-The server processes the requests and sends several responses along the way to verify communication.
-
+The server processes the requests and manages the student database through a .txt file, sending several response messages throughout the process.
 ## Screenshots
 
 #### 
