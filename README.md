@@ -2,7 +2,7 @@
 
 ####
 
-A client-server program written in C to serve as communication to edit and display a student database.
+A client-server program written in C to serve as communication to edit and display a student database in the CLI.
 
 The client can send the following requests to the server:
 1. add(ID, Fname, Lname, score): this request adds new student information to the database
